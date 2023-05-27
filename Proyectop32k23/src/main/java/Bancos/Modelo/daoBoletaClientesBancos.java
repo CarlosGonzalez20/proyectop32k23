@@ -15,12 +15,12 @@ import java.util.List;
  * @author cdavi
  */
 public class daoBoletaClientesBancos {
-    private static final String SQL_SELECT = "SELECT bolId, bolCodigo, bolFechaEmision, concid, concNombre, cueNumero, concEfecto, perTipoId, concEstatus, clNombre, clId, clNit FROM tbl_boletaClientesBancos";
-    private static final String SQL_INSERT = "INSERT INTO tbl_boletaClientesBancos(bolId, bolCodigo, bolFechaEmision, concid, concNombre, cueNumero, concEfecto, perTipoId, concEstatus, clNombre, clId, clNit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_boletaClientesBancos SET bolCodigo=?, bolFechaEmision=?, concid=?, concNombre=?, cueNumero=?, concEfecto=?, perTipoId=?, concEstatus=?, clNombre=?, clId=?, clNit=? WHERE bolId = ?";
+    private static final String SQL_SELECT = "SELECT bolId, codBanco, bolFechaEmision, clId, bolSaldo, concId, tipMovId, cueId, bolEfecto, tipModId FROM tbl_boletaClientesBancos";
+    private static final String SQL_INSERT = "INSERT INTO tbl_boletaClientesBancos(bolId, codBanco, bolFechaEmision, clId, bolSaldo, concId, tipMovId, cueId, bolEfecto, tipModId) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_boletaClientesBancos SET codBanco=?, bolFechaEmision=?, clId=?, bolSaldo=?, concId=?, tipMovId=?, cueId=?, bolEfecto=?, tipModId=? WHERE bolId = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_boletaClientesBancos WHERE bolId=?";
-    private static final String SQL_SELECT_NOMBRE = "SELECT bolId, bolFechaEmision, concid, concNombre, cueNumero, concEfecto, perTipoId, concEstatus, clNombre, clId, clNit FROM tbl_boletaClientesBancos WHERE bolCodigo = ?";
-    private static final String SQL_SELECT_ID = "SELECT bolId, bolCodigo, bolFechaEmision, concid, concNombre, cueNumero, concEfecto, perTipoId, concEstatus, clNombre, clId, clNit FROM tbl_boletaClientesBancos WHERE bolId = ?";    
+    private static final String SQL_SELECT_NOMBRE = "SELECT bolId, bolFechaEmision, clId, bolSaldo, concId, tipMovId, cueId, bolEfecto, tipModId FROM tbl_boletaClientesBancos WHERE codBanco = ?";
+    private static final String SQL_SELECT_ID = "SELECT bolId, codBanco, bolFechaEmision, clId, bolSaldo, concId, tipMovId, cueId, bolEfecto, tipModId FROM tbl_boletaClientesBancos WHERE bolId = ?";    
 
     public List<clsBoletaClientesBancos> consultaBoleta() {
         Connection conn = null;
@@ -34,30 +34,26 @@ public class daoBoletaClientesBancos {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int id_boleta = rs.getInt("bolId");
-                int codigo_boleta = rs.getInt("bolCodigo");
+                int codigo_banco = rs.getInt("codBanco");
                 String fecha_emision = rs.getString("bolFechaEmision");
-                int id_concepto = rs.getInt("concid");
-                String nombre_concepto = rs.getString("concNombre");
-                int numero_cuenta = rs.getInt("cueNumero");
-                String efecto_concepto = rs.getString("concEfecto");
-                int id_tipoPersona = rs.getInt("perTipoId");
-                String estatus_concepto = rs.getString("concEstatus");
-                String nombre_cliente = rs.getString("clNombre");
                 int id_cliente = rs.getInt("clId");
-                String nit_cliente = rs.getString("clNit");
+                float saldo_boleta = rs.getFloat("bolSaldo");
+                int id_concepto = rs.getInt("conId");
+                int id_tipoMovimiento = rs.getInt("tipMovId");
+                int id_cuenta = rs.getInt("cueId");
+                String efecto_boleta = rs.getString("bolEfecto");
+                int id_tipoMoneda = rs.getInt("tipModId");
                 clsBoletaClientesBancos boleta = new clsBoletaClientesBancos();
                 boleta.setIdBoleta(id_boleta);
-                boleta.setCodigoBoleta(codigo_boleta);
+                boleta.setCodigoBanco(codigo_banco);
                 boleta.setFechaEmisionBoleta(fecha_emision);
-                boleta.setIdConcepto(id_concepto);
-                boleta.setNombreConcepto(nombre_concepto);
-                boleta.setNumeroCuenta(numero_cuenta);
-                boleta.setEfectoConcepto(efecto_concepto);
-                boleta.setIdTipoPersonaBancos(id_tipoPersona);
-                boleta.setEstatusConcepto(estatus_concepto);
-                boleta.setNombreCliente(nombre_cliente);
                 boleta.setIdCliente(id_cliente);
-                boleta.setNitCliente(nit_cliente);
+                boleta.setSaldoBoleta(saldo_boleta);
+                boleta.setIdConcepto(id_concepto);
+                boleta.setIdTipoMovimiento(id_tipoMovimiento);
+                boleta.setIdCuenta(id_cuenta);
+                boleta.setEfectoBoleta(efecto_boleta);
+                boleta.setIdTipoMoneda(id_tipoMoneda);
                 boletas.add(boleta);
             }
         } catch (SQLException ex) {

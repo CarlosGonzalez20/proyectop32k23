@@ -14,17 +14,15 @@ import Bancos.Modelo.daoBoletaClientesBancos;
 
 public class clsBoletaClientesBancos {
     private int IdBoleta;
-    private int CodigoBoleta;
+    private int CodigoBanco;
     private String FechaEmisionBoleta;
-    private int IdConcepto;
-    private String nombreConcepto;
-    private int NumeroCuenta;
-    private String efectoConcepto;   
-    private int IdTipoPersonaBancos;
-    private String estatusConcepto;
-    private String nombreCliente;
     private int IdCliente;
-    private String NitCliente;
+    private float SaldoBoleta;
+    private int IdConcepto;  
+    private int IdTipoMovimiento;
+    private int IdCuenta;
+    private String EfectoBoleta;
+    private int IdTipoMoneda;
 
     public clsBoletaClientesBancos() {
     }
@@ -33,117 +31,86 @@ public class clsBoletaClientesBancos {
         this.IdBoleta = IdBoleta;
     }
 
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta) {
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco) {
         this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
+        this.CodigoBanco = CodigoBanco;
     }
 
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta) {
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta) {
         this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
+        this.CodigoBanco = CodigoBanco;
         this.FechaEmisionBoleta = FechaEmisionBoleta;
     }
 
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto) {
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta, int IdCliente) {
         this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
+        this.CodigoBanco = CodigoBanco;
         this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-    }
-
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto) {
-        this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
-        this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-    }
-
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto, int NumeroCuenta) {
-        this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
-        this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-        this.NumeroCuenta = NumeroCuenta;
-    }
-
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto, int NumeroCuenta, String efectoConcepto) {
-        this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
-        this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-        this.NumeroCuenta = NumeroCuenta;
-        this.efectoConcepto = efectoConcepto;
-    }
-
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto, int NumeroCuenta, String efectoConcepto, int IdTipoPersonaBancos) {
-        this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
-        this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-        this.NumeroCuenta = NumeroCuenta;
-        this.efectoConcepto = efectoConcepto;
-        this.IdTipoPersonaBancos = IdTipoPersonaBancos;
-    }
-
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto, int NumeroCuenta, String efectoConcepto, int IdTipoPersonaBancos, String estatusConcepto) {
-        this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
-        this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-        this.NumeroCuenta = NumeroCuenta;
-        this.efectoConcepto = efectoConcepto;
-        this.IdTipoPersonaBancos = IdTipoPersonaBancos;
-        this.estatusConcepto = estatusConcepto;
-    }
-
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto, int NumeroCuenta, String efectoConcepto, int IdTipoPersonaBancos, String estatusConcepto, String nombreCliente) {
-        this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
-        this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-        this.NumeroCuenta = NumeroCuenta;
-        this.efectoConcepto = efectoConcepto;
-        this.IdTipoPersonaBancos = IdTipoPersonaBancos;
-        this.estatusConcepto = estatusConcepto;
-        this.nombreCliente = nombreCliente;
-    }
-
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto, int NumeroCuenta, String efectoConcepto, int IdTipoPersonaBancos, String estatusConcepto, String nombreCliente, int IdCliente) {
-        this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
-        this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-        this.NumeroCuenta = NumeroCuenta;
-        this.efectoConcepto = efectoConcepto;
-        this.IdTipoPersonaBancos = IdTipoPersonaBancos;
-        this.estatusConcepto = estatusConcepto;
-        this.nombreCliente = nombreCliente;
         this.IdCliente = IdCliente;
     }
 
-    public clsBoletaClientesBancos(int IdBoleta, int CodigoBoleta, String FechaEmisionBoleta, int IdConcepto, String nombreConcepto, int NumeroCuenta, String efectoConcepto, int IdTipoPersonaBancos, String estatusConcepto, String nombreCliente, int IdCliente, String NitCliente) {
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta, int IdCliente, float SaldoBoleta) {
         this.IdBoleta = IdBoleta;
-        this.CodigoBoleta = CodigoBoleta;
+        this.CodigoBanco = CodigoBanco;
         this.FechaEmisionBoleta = FechaEmisionBoleta;
-        this.IdConcepto = IdConcepto;
-        this.nombreConcepto = nombreConcepto;
-        this.NumeroCuenta = NumeroCuenta;
-        this.efectoConcepto = efectoConcepto;
-        this.IdTipoPersonaBancos = IdTipoPersonaBancos;
-        this.estatusConcepto = estatusConcepto;
-        this.nombreCliente = nombreCliente;
         this.IdCliente = IdCliente;
-        this.NitCliente = NitCliente;
+        this.SaldoBoleta = SaldoBoleta;
     }
-    
-    
+
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta, int IdCliente, float SaldoBoleta, int IdConcepto) {
+        this.IdBoleta = IdBoleta;
+        this.CodigoBanco = CodigoBanco;
+        this.FechaEmisionBoleta = FechaEmisionBoleta;
+        this.IdCliente = IdCliente;
+        this.SaldoBoleta = SaldoBoleta;
+        this.IdConcepto = IdConcepto;
+    }
+
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta, int IdCliente, float SaldoBoleta, int IdConcepto, int IdTipoMovimiento) {
+        this.IdBoleta = IdBoleta;
+        this.CodigoBanco = CodigoBanco;
+        this.FechaEmisionBoleta = FechaEmisionBoleta;
+        this.IdCliente = IdCliente;
+        this.SaldoBoleta = SaldoBoleta;
+        this.IdConcepto = IdConcepto;
+        this.IdTipoMovimiento = IdTipoMovimiento;
+    }
+
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta, int IdCliente, float SaldoBoleta, int IdConcepto, int IdTipoMovimiento, int IdCuenta) {
+        this.IdBoleta = IdBoleta;
+        this.CodigoBanco = CodigoBanco;
+        this.FechaEmisionBoleta = FechaEmisionBoleta;
+        this.IdCliente = IdCliente;
+        this.SaldoBoleta = SaldoBoleta;
+        this.IdConcepto = IdConcepto;
+        this.IdTipoMovimiento = IdTipoMovimiento;
+        this.IdCuenta = IdCuenta;
+    }
+
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta, int IdCliente, float SaldoBoleta, int IdConcepto, int IdTipoMovimiento, int IdCuenta, String EfectoBoleta) {
+        this.IdBoleta = IdBoleta;
+        this.CodigoBanco = CodigoBanco;
+        this.FechaEmisionBoleta = FechaEmisionBoleta;
+        this.IdCliente = IdCliente;
+        this.SaldoBoleta = SaldoBoleta;
+        this.IdConcepto = IdConcepto;
+        this.IdTipoMovimiento = IdTipoMovimiento;
+        this.IdCuenta = IdCuenta;
+        this.EfectoBoleta = EfectoBoleta;
+    }
+
+    public clsBoletaClientesBancos(int IdBoleta, int CodigoBanco, String FechaEmisionBoleta, int IdCliente, float SaldoBoleta, int IdConcepto, int IdTipoMovimiento, int IdCuenta, String EfectoBoleta, int IdTipoMoneda) {
+        this.IdBoleta = IdBoleta;
+        this.CodigoBanco = CodigoBanco;
+        this.FechaEmisionBoleta = FechaEmisionBoleta;
+        this.IdCliente = IdCliente;
+        this.SaldoBoleta = SaldoBoleta;
+        this.IdConcepto = IdConcepto;
+        this.IdTipoMovimiento = IdTipoMovimiento;
+        this.IdCuenta = IdCuenta;
+        this.EfectoBoleta = EfectoBoleta;
+        this.IdTipoMoneda = IdTipoMoneda;
+    }
 
     public int getIdBoleta() {
         return IdBoleta;
@@ -153,12 +120,12 @@ public class clsBoletaClientesBancos {
         this.IdBoleta = IdBoleta;
     }
 
-    public int getCodigoBoleta() {
-        return CodigoBoleta;
+    public int getCodigoBanco() {
+        return CodigoBanco;
     }
 
-    public void setCodigoBoleta(int CodigoBoleta) {
-        this.CodigoBoleta = CodigoBoleta;
+    public void setCodigoBanco(int CodigoBanco) {
+        this.CodigoBanco = CodigoBanco;
     }
 
     public String getFechaEmisionBoleta() {
@@ -169,62 +136,6 @@ public class clsBoletaClientesBancos {
         this.FechaEmisionBoleta = FechaEmisionBoleta;
     }
 
-    public int getIdConcepto() {
-        return IdConcepto;
-    }
-
-    public void setIdConcepto(int IdConcepto) {
-        this.IdConcepto = IdConcepto;
-    }
-
-    public String getNombreConcepto() {
-        return nombreConcepto;
-    }
-
-    public void setNombreConcepto(String nombreConcepto) {
-        this.nombreConcepto = nombreConcepto;
-    }
-
-    public int getNumeroCuenta() {
-        return NumeroCuenta;
-    }
-
-    public void setNumeroCuenta(int NumeroCuenta) {
-        this.NumeroCuenta = NumeroCuenta;
-    }
-
-    public String getEfectoConcepto() {
-        return efectoConcepto;
-    }
-
-    public void setEfectoConcepto(String efectoConcepto) {
-        this.efectoConcepto = efectoConcepto;
-    }
-
-    public int getIdTipoPersonaBancos() {
-        return IdTipoPersonaBancos;
-    }
-
-    public void setIdTipoPersonaBancos(int IdTipoPersonaBancos) {
-        this.IdTipoPersonaBancos = IdTipoPersonaBancos;
-    }
-
-    public String getEstatusConcepto() {
-        return estatusConcepto;
-    }
-
-    public void setEstatusConcepto(String estatusConcepto) {
-        this.estatusConcepto = estatusConcepto;
-    }
-
-    public String getNombreCliente() {
-        return nombreCliente;
-    }
-
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
-    }
-
     public int getIdCliente() {
         return IdCliente;
     }
@@ -233,18 +144,58 @@ public class clsBoletaClientesBancos {
         this.IdCliente = IdCliente;
     }
 
-    public String getNitCliente() {
-        return NitCliente;
+    public float getSaldoBoleta() {
+        return SaldoBoleta;
     }
 
-    public void setNitCliente(String NitCliente) {
-        this.NitCliente = NitCliente;
+    public void setSaldoBoleta(float SaldoBoleta) {
+        this.SaldoBoleta = SaldoBoleta;
     }
 
+    public int getIdConcepto() {
+        return IdConcepto;
+    }
+
+    public void setIdConcepto(int IdConcepto) {
+        this.IdConcepto = IdConcepto;
+    }
+
+    public int getIdTipoMovimiento() {
+        return IdTipoMovimiento;
+    }
+
+    public void setIdTipoMovimiento(int IdTipoMovimiento) {
+        this.IdTipoMovimiento = IdTipoMovimiento;
+    }
+
+    public int getIdCuenta() {
+        return IdCuenta;
+    }
+
+    public void setIdCuenta(int IdCuenta) {
+        this.IdCuenta = IdCuenta;
+    }
+
+    public String getEfectoBoleta() {
+        return EfectoBoleta;
+    }
+
+    public void setEfectoBoleta(String EfectoBoleta) {
+        this.EfectoBoleta = EfectoBoleta;
+    }
+
+    public int getIdTipoMoneda() {
+        return IdTipoMoneda;
+    }
+
+    public void setIdTipoMoneda(int IdTipoMoneda) {
+        this.IdTipoMoneda = IdTipoMoneda;
+    }
+    
     @Override
     public String toString() {
-        return "clsBoletaClientesBancos{" + "IdBoleta=" + IdBoleta + ", CodigoBoleta=" + CodigoBoleta + ", FechaEmisionBoleta=" + FechaEmisionBoleta + ", IdConcepto=" + IdConcepto + ", nombreConcepto=" + nombreConcepto + ", NumeroCuenta=" + NumeroCuenta + ", efectoConcepto=" + efectoConcepto + ", IdTipoPersonaBancos=" + IdTipoPersonaBancos + ", estatusConcepto=" + estatusConcepto +
-                ", nombreCliente=" + nombreCliente + ", IdCliente=" + IdCliente + ", NitCliente=" + NitCliente +'}';
+        return "clsBoletaClientesBancos{" + "IdBoleta=" + IdBoleta + ", CodigoBanco=" + CodigoBanco + ", FechaEmisionBoleta=" + FechaEmisionBoleta + ", IdCliente=" + IdCliente + ", SaldoBoleta=" + SaldoBoleta + ", IdConcepto=" + IdConcepto + ", IdTipoMovimiento=" + IdTipoMovimiento + ", IdCuenta=" + IdCuenta + ", EfectoBoleta=" + EfectoBoleta +
+                ", IdTipoMoneda=" + IdTipoMoneda +'}';
     }
     //Metodos de acceso a la capa controlador
     public clsBoletaClientesBancos getBuscarInformacionBoletaPorCodigo(clsBoletaClientesBancos boleta)
