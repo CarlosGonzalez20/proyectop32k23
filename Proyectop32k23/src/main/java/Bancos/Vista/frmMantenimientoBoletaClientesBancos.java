@@ -104,21 +104,27 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID");
-        modelo.addColumn("Nombre Movimiento");
-        modelo.addColumn("Estatus Movimiento");
-       
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Cuenta");
+        modelo.addColumn("Banco");
+        modelo.addColumn("Cargo");
+        modelo.addColumn("Abono");
 
-        clsTipoMovimientoBancos movimiento = new clsTipoMovimientoBancos();
+        clsBoletaClientesBancos boleta = new clsBoletaClientesBancos();
         //VendedorDAO vendedorDAO = new VendedorDAO();
-        List<clsTipoMovimientoBancos> listadoTipoMovimientos = movimiento.getListadoTipoMovimiento();
+        List<clsBoletaClientesBancos> listadoBoletaCliente = boleta.getListadoBoletas();
      
         tablaMovimientos.setModel(modelo);
-        String[] dato = new String[3];
-        for (int i = 0; i < listadoTipoMovimientos.size(); i++) {
-            dato[0] = Integer.toString(listadoTipoMovimientos.get(i).getTipoMovimientoId());
-            dato[1] = listadoTipoMovimientos.get(i).getNombreMovimiento();
-            dato[2] = listadoTipoMovimientos.get(i).getEstatusMovimiento();
+        String[] dato = new String[7];
+        for (int i = 0; i < listadoBoletaCliente.size(); i++) {
+            dato[0] = listadoBoletaCliente.get(i).getFechaEmisionBoleta();
+            dato[1] = Integer.toString(listadoBoletaCliente.get(i).getIdBoleta());
+            dato[2] = Integer.toString(listadoBoletaCliente.get(i).getIdConcepto());
+            dato[3] = Integer.toString(listadoBoletaCliente.get(i).getIdCuenta());
+            dato[4] = Integer.toString(listadoBoletaCliente.get(i).getCodigoBanco());
+            dato[5] = listadoBoletaCliente.get(i).getEfectoBoleta();      
             modelo.addRow(dato);
         }       
     }
@@ -175,6 +181,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         cbIdCuenta = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         cbTipoMoneda = new javax.swing.JComboBox<>();
+        label22 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         cbCodigoMov = new javax.swing.JComboBox<>();
@@ -183,6 +190,10 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         rbabono = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
         txtvalor = new javax.swing.JTextField();
+        label24 = new javax.swing.JLabel();
+        label21 = new javax.swing.JLabel();
+        label23 = new javax.swing.JLabel();
+        label25 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -191,7 +202,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Tipo Movimiento");
+        setTitle("Mantenimiento Boleta Cliente");
         setVisible(true);
 
         tablaMovimientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -355,6 +366,9 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel12.setText("Moneda");
         jLabel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        label22.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label22.setText("TOTAL DE CARGOS:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -393,6 +407,11 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbTipoMoneda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(label22)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,6 +439,11 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addComponent(jLabel12)
                     .addComponent(cbTipoMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(label22)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -475,6 +499,18 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        label24.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label24.setText("TOTAL DE ABONOS:");
+
+        label21.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label21.setText("TOTAL DE CARGOS:");
+
+        label23.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label23.setText("TOTAL DE CARGOS:");
+
+        label25.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label25.setText("TOTAL :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -484,18 +520,24 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 776, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(21, 21, 21)))
-                        .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label24)
+                                .addGap(207, 207, 207)
+                                .addComponent(label23)
+                                .addGap(182, 182, 182)
+                                .addComponent(label25)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -504,19 +546,30 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(106, 106, 106))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(644, 644, 644)
+                    .addComponent(label21)
+                    .addContainerGap(733, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label24)
+                    .addComponent(label23)
+                    .addComponent(label25))
+                .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -528,6 +581,11 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(306, 306, 306)
+                    .addComponent(label21)
+                    .addContainerGap(306, Short.MAX_VALUE)))
         );
 
         pack();
@@ -734,6 +792,11 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label21;
+    private javax.swing.JLabel label22;
+    private javax.swing.JLabel label23;
+    private javax.swing.JLabel label24;
+    private javax.swing.JLabel label25;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel lb;
