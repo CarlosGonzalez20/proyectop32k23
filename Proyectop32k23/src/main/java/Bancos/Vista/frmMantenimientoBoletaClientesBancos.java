@@ -6,9 +6,16 @@
 package Bancos.Vista;
 
 
+import Bancos.Controlador.clsBoletaClientesBancos;
+import Bancos.Controlador.clsBancoExterno;
+//import Bancos.Controlador.clsClientes;
+import Bancos.Controlador.clsConceptosBancos;
 import Bancos.Controlador.clsTipoMovimientoBancos;
+import Bancos.Controlador.clsCuentasBancos;
+import Bancos.Controlador.clsTipoMoneda;
 import Seguridad.Controlador.clsBitacora;
 import Seguridad.Controlador.clsUsuarioConectado;
+import java.awt.Component;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -21,16 +28,77 @@ import javax.swing.JOptionPane;
  * @author visitante
  */
 public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalFrame {
-    int codigoAplicacion= 5004;
+    int codigoAplicacion= 5005;
 
-    public void llenadoDeCombos() {
-        /*EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-        List<Empleado> empleados = empleadoDAO.select();
-        cbox_empleado.addItem("Seleccione una opción");
-        for (int i = 0; i < empleados.size(); i++) {
-            cbox_empleado.addItem(empleados.get(i).getNombreEmpleado());
-        } */
+    public void llenadoCodigoBanco() {
+       clsBancoExterno banco = new clsBancoExterno();
+        List<clsBancoExterno> listaBancos = banco.getListadoBancosExternos();
+        cbNombreBanco.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbNombreBanco.addItem("Seleccionar...");
+        for (int i = 0; i < listaBancos.size(); i++) {
+            clsBancoExterno bancoExterno = listaBancos.get(i);
+            String item = bancoExterno.getCodigoBanco()+ " - "+bancoExterno.getNombreBanco();
+            cbNombreBanco.addItem(item);
+        }
     }
+        
+     /* public void llenadoDeComboNombreCliente() {
+        clsClientes cliente = new clsClientes();
+        List<clsClientes> listaClientes = cliente.getListadoClientes();
+        cbNombreCliente.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbNombreCliente.addItem("Seleccionar...");
+        for (int i = 0; i < listaClientes.size(); i++) {
+            clsClientes clientenombre = listaClientes.get(i);
+            String item = clientenombre.getTipModId() + " - " + clientenombre.getNombreCliente();
+            cbNombreCliente.addItem(item);
+        }*/
+     
+    public void llenadoConcepto() {
+       clsConceptosBancos concepto = new clsConceptosBancos();
+        List<clsConceptosBancos> listaConcepto = concepto.getListadoConceptos();
+        cbConcepto.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbConcepto.addItem("Seleccionar...");
+        for (int i = 0; i < listaConcepto.size(); i++) {
+            clsConceptosBancos conceptosBancos = listaConcepto.get(i);
+            String item = conceptosBancos.getIdConcepto()+ " - "+conceptosBancos.getNombreConcepto();
+            cbConcepto.addItem(item);
+        }
+    }
+    
+    public void llenadoTipoMovimiento() {
+       clsTipoMovimientoBancos movimiento = new clsTipoMovimientoBancos();
+        List<clsTipoMovimientoBancos> listaMovimiento = movimiento.getListadoTipoMovimiento();
+        cbCodigoMov.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbCodigoMov.addItem("Seleccionar...");
+        for (int i = 0; i < listaMovimiento.size(); i++) {
+            clsTipoMovimientoBancos movimientosBancos = listaMovimiento.get(i);
+            String item = movimientosBancos.getTipoMovimientoId()+ " - "+movimientosBancos.getNombreMovimiento();
+            cbCodigoMov.addItem(item);
+        }
+    }
+    
+    public void llenadoCuentas() {
+       clsCuentasBancos cuentas = new clsCuentasBancos();
+        List<clsCuentasBancos> listaCuentas = cuentas.getListadoCuentas();
+        cbIdCuenta.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbIdCuenta.addItem("Seleccionar...");
+        for (int i = 0; i < listaCuentas.size(); i++) {
+            cbIdCuenta.addItem(String.valueOf(listaCuentas.get(i).getIdCuenta()));
+        } 
+    }
+     
+    public void llenadoDeCombos() {
+        clsTipoMoneda moneda = new clsTipoMoneda();
+        List<clsTipoMoneda> listaTipoMonedas = moneda.getListadoMonedas();
+        cbTipoMoneda.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbTipoMoneda.addItem("Seleccionar...");
+        for (int i = 0; i < listaTipoMonedas.size(); i++) {
+            clsTipoMoneda tipoMoneda = listaTipoMonedas.get(i);
+            String item = tipoMoneda.getTipModId() + " - " + tipoMoneda.getTipMondAbreviacion();
+            cbTipoMoneda.addItem(item);
+        }
+    }
+     
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -56,7 +124,8 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     public frmMantenimientoBoletaClientesBancos() {
         initComponents();
         llenadoDeTablas();
-        llenadoDeCombos();
+        llenadoCodigoBanco();
+        llenadoConcepto();
     }
 
     /**
@@ -92,16 +161,20 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbNombreCliente = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbConcepto = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbNombreBanco = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        cbIdCuenta = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        cbTipoMoneda = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cbCodigoMov = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -270,7 +343,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel4.setText("Nombre Cliente");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNombreCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel5.setText("Valor");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -278,12 +351,22 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel6.setText("Concepto");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbConcepto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("Banco");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNombreBanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel11.setText("Cuenta");
+        jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        cbIdCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel12.setText("Moneda");
+        jLabel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        cbTipoMoneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -303,7 +386,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -311,11 +394,21 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cbConcepto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbNombreBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbTipoMoneda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -325,23 +418,27 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(cbNombreBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11)
+                    .addComponent(cbIdCuenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(cbTipoMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -349,7 +446,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel8.setText("Código");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCodigoMov.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("Cargo");
         jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -371,7 +468,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbCodigoMov, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
@@ -390,7 +487,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCodigoMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
@@ -556,10 +653,9 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     }//GEN-LAST:event_btnLimpiarActionPerformed
     public void limpiarTextos()
     {
-        txtNombre.setText("");
         txtbuscado.setText("");
-        txtTipoMovimiento.setText("");
         tipoEstatus.clearSelection();
+        cbConcepto.setSelectedIndex(0);
             
     }
     public void habilitarBotones()
@@ -605,13 +701,17 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cbCodigoMov;
+    private javax.swing.JComboBox<String> cbConcepto;
+    private javax.swing.JComboBox<String> cbIdCuenta;
+    private javax.swing.JComboBox<String> cbNombreBanco;
+    private javax.swing.JComboBox<String> cbNombreCliente;
+    private javax.swing.JComboBox<String> cbTipoMoneda;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
