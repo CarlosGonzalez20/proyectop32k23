@@ -83,11 +83,13 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         cbIdCuenta.setAlignmentX(Component.CENTER_ALIGNMENT);
         cbIdCuenta.addItem("Seleccionar...");
         for (int i = 0; i < listaCuentas.size(); i++) {
-            cbIdCuenta.addItem(String.valueOf(listaCuentas.get(i).getIdCuenta()));
+            clsCuentasBancos cuentasBancos = listaCuentas.get(i);
+            String item = cuentasBancos.getIdCuenta()+ " - "+cuentasBancos.getNumeroCuenta();
+            cbIdCuenta.addItem(item);
         } 
     }
      
-    public void llenadoDeCombos() {
+    public void llenadoMoneda() {
         clsTipoMoneda moneda = new clsTipoMoneda();
         List<clsTipoMoneda> listaTipoMonedas = moneda.getListadoMonedas();
         cbTipoMoneda.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -126,6 +128,9 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         llenadoDeTablas();
         llenadoCodigoBanco();
         llenadoConcepto();
+        llenadoTipoMovimiento();
+        llenadoCuentas();
+        llenadoMoneda();
     }
 
     /**
@@ -189,6 +194,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         setTitle("Mantenimiento Tipo Movimiento");
         setVisible(true);
 
+        tablaMovimientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tablaMovimientos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,7 +220,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Id");
 
-        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bancos/Vista/registrar.jpg"))); // NOI18N
         btnRegistrar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +227,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
             }
         });
 
-        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bancos/Vista/modificar.jpg"))); // NOI18N
         btnModificar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modificar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,7 +234,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
             }
         });
 
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bancos/Vista/eliminar.jpg"))); // NOI18N
         btnEliminar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Eliminar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +241,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
             }
         });
 
-        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bancos/Vista/refrescar.jpg"))); // NOI18N
         btnActualizar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actualizar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,13 +255,13 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnModificar)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar)
-                .addGap(18, 18, 18)
-                .addComponent(btnActualizar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +270,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -341,27 +343,17 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel4.setText("Nombre Cliente");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbNombreCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel6.setText("Concepto");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        cbConcepto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("Banco");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbNombreBanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel11.setText("Cuenta");
         jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbIdCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel12.setText("Moneda");
         jLabel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        cbTipoMoneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -435,8 +427,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel8.setText("Código");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cbCodigoMov.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel9.setText("Cargo");
         jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -496,7 +486,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 769, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 776, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(21, 21, 21)))
@@ -504,7 +494,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -610,15 +600,26 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        clsTipoMovimientoBancos movimiento = new clsTipoMovimientoBancos();
+        clsBoletaClientesBancos boleta = new clsBoletaClientesBancos();
         //usuario.setNombreUsuario(txtbuscado.getText());        
-        movimiento.setTipoMovimientoId(Integer.parseInt(txtbuscado.getText()));        
-        movimiento = movimiento.getBuscarInformacionTipoMovimientoPorId(movimiento);
-        System.out.println("Movimiento retornado:" + movimiento);        
-        txtNombre.setText(movimiento.getNombreMovimiento());
+        boleta.setIdBoleta(Integer.parseInt(txtbuscado.getText()));        
+        boleta = boleta.getBuscarInformacionBoletaPorId(boleta);
+        System.out.println("Boleta retornada:" + boleta);        
+        txtCodigoDocumento.setText(Integer.toString(boleta.getCodigoBanco()));
+        txtFecha.setText(boleta.getFechaEmisionBoleta());
+        txtvalor.setText(Float.toString(boleta.getSaldoBoleta()));
         
-        rbHabilitado.setSelected(movimiento.getEstatusMovimiento().equals("T"));
-        rbDeshabilitado.setSelected(movimiento.getEstatusMovimiento().equals("F"));
+        int tipoMonedaId = boleta.getIdTipoMoneda();
+        for (int i = 1; i < cbTipoMoneda.getItemCount(); i++) {
+            String item = cbTipoMoneda.getItemAt(i).toString();
+            int itemId = Integer.parseInt(item.split(" - ")[0]); // Obtener el ID del item
+            
+            if (itemId == tipoMonedaId) {
+                cbTipoMoneda.setSelectedIndex(i);
+                break;
+            }
+        }
+        
         
         int resultadoBitacora=0;
         clsBitacora bitacoraRegistro = new clsBitacora();
@@ -626,7 +627,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-         // TODO add your handling code here:
+      /*   // TODO add your handling code here:
         clsTipoMovimientoBancos movimiento = new clsTipoMovimientoBancos();
         movimiento.setTipoMovimientoId(Integer.parseInt(txtbuscado.getText()));
         movimiento.setNombreMovimiento(txtNombre.getText());
@@ -653,7 +654,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
             } else {
                 // No se cumple la condición de selección de dos botones
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un estatus.");
-            }
+            }*/
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
