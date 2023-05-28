@@ -104,27 +104,34 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Fecha");
-        modelo.addColumn("Código");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Cuenta");
+        modelo.addColumn("Documento No.");
         modelo.addColumn("Banco");
-        modelo.addColumn("Cargo");
-        modelo.addColumn("Abono");
-
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Cliente");
+        modelo.addColumn("Saldo");      
+        modelo.addColumn("Concepto");
+        modelo.addColumn("Movimiento");
+        modelo.addColumn("Cuenta");
+        modelo.addColumn("Efecto"); 
+        modelo.addColumn("Moneda");
+        
         clsBoletaClientesBancos boleta = new clsBoletaClientesBancos();
         //VendedorDAO vendedorDAO = new VendedorDAO();
         List<clsBoletaClientesBancos> listadoBoletaCliente = boleta.getListadoBoletas();
      
         tablaMovimientos.setModel(modelo);
-        String[] dato = new String[7];
+        String[] dato = new String[10];
         for (int i = 0; i < listadoBoletaCliente.size(); i++) {
-            dato[0] = listadoBoletaCliente.get(i).getFechaEmisionBoleta();
-            dato[1] = Integer.toString(listadoBoletaCliente.get(i).getIdBoleta());
-            dato[2] = Integer.toString(listadoBoletaCliente.get(i).getIdConcepto());
-            dato[3] = Integer.toString(listadoBoletaCliente.get(i).getIdCuenta());
-            dato[4] = Integer.toString(listadoBoletaCliente.get(i).getCodigoBanco());
-            dato[5] = listadoBoletaCliente.get(i).getEfectoBoleta();      
+            dato[0] = Integer.toString(listadoBoletaCliente.get(i).getIdBoleta());
+            dato[1] = Integer.toString(listadoBoletaCliente.get(i).getCodigoBanco());
+            dato[2] = listadoBoletaCliente.get(i).getFechaEmisionBoleta();
+            dato[3] = listadoBoletaCliente.get(i).getNombreCliente();
+            dato[4] = Float.toString(listadoBoletaCliente.get(i).getSaldoBoleta());
+            dato[5] = Integer.toString(listadoBoletaCliente.get(i).getIdConcepto());
+            dato[6] = Integer.toString(listadoBoletaCliente.get(i).getIdTipoMovimiento());
+            dato[7] = Integer.toString(listadoBoletaCliente.get(i).getIdCuenta());
+            dato[8] = listadoBoletaCliente.get(i).getEfectoBoleta();
+            dato[9] = Integer.toString(listadoBoletaCliente.get(i).getIdTipoMoneda());
             modelo.addRow(dato);
         }       
     }
@@ -172,7 +179,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel3 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cbNombreCliente = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         cbConcepto = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -181,7 +187,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         cbIdCuenta = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         cbTipoMoneda = new javax.swing.JComboBox<>();
-        label22 = new javax.swing.JLabel();
+        txtNombreCliente = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         cbCodigoMov = new javax.swing.JComboBox<>();
@@ -367,9 +373,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel12.setText("Moneda");
         jLabel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        label22.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label22.setText("TOTAL DE CARGOS:");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -388,7 +391,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbNombreCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtNombreCliente))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -408,11 +411,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbTipoMoneda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(label22)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,9 +428,9 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cbNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(cbIdCuenta))
+                    .addComponent(cbIdCuenta)
+                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -440,11 +438,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addComponent(jLabel12)
                     .addComponent(cbTipoMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(label22)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -593,7 +586,32 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     }//GEN-LAST:event_btnEliminarActionPerformed
         int contador=0; 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+
         clsBoletaClientesBancos boleta = new clsBoletaClientesBancos();
+
+        boleta.setIdBoleta(Integer.parseInt(txtCodigoDocumento.getText()));
+        
+        /*String selectedItem= cbNombreBanco.getSelectedItem().toString();
+        int itemNombreBanco = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setCodigoBanco(itemNombreBanco);
+        
+        boleta.setFechaEmisionBoleta(txtFecha.getText()); 
+        
+        String selectedItem3= cbConcepto.getSelectedItem().toString();
+        int itemConcepto = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setIdConcepto(itemConcepto);
+        
+        String selectedItem4= cbIdCuenta.getSelectedItem().toString();
+        int itemCuenta = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setIdCuenta(itemCuenta);
+        
+        boleta.setNombreCliente(txtNombreCliente.getText());
+        
+        String selectedItem5 = cbTipoMoneda.getSelectedItem().toString();
+        int itemTipoMoneda = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setIdTipoMoneda(itemTipoMoneda);
+                
+        boleta.setSaldoBoleta(Float.parseFloat(txtvalor.getText()));
         
         if(rbcargo.isSelected()){
             boleta.setEfectoBoleta("Cargo");
@@ -607,30 +625,10 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
             return;
         }
         
-        boleta.setIdBoleta(Integer.parseInt(txtCodigoDocumento.getText()));
-        boleta.setFechaEmisionBoleta(txtFecha.getText());   
-        boleta.setSaldoBoleta(Float.parseFloat(txtvalor.getText()));
-        
-        String selectedItem = cbNombreCliente.getSelectedItem().toString();
-        int itemNombre = Integer.parseInt(selectedItem.split(" - ")[0]);
-        boleta.setIdCliente(itemNombre);
-        
-        String selectedItem2= cbConcepto.getSelectedItem().toString();
-        int itemConcepto = Integer.parseInt(selectedItem.split(" - ")[0]);
-        boleta.setIdConcepto(itemConcepto);
-        
-        String selectedItem3= cbNombreBanco.getSelectedItem().toString();
-        int itemNombreBanco = Integer.parseInt(selectedItem.split(" - ")[0]);
-        boleta.setCodigoBanco(itemNombreBanco);
-        
-        String selectedItem4= cbIdCuenta.getSelectedItem().toString();
-        int itemCuenta = Integer.parseInt(selectedItem.split(" - ")[0]);
-        boleta.setIdCuenta(itemCuenta);
-        
-        String selectedItem5 = cbTipoMoneda.getSelectedItem().toString();
-        int itemTipoMoneda = Integer.parseInt(selectedItem.split(" - ")[0]);
-        boleta.setIdTipoMoneda(itemTipoMoneda);
-        
+        /*String selectedItem = cbNombreCliente.getSelectedItem().toString();
+        String itemNombre = selectedItem.split(" - ")[0];
+        boleta.setNombreCliente(itemNombre);*/
+  
         JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         
@@ -759,7 +757,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private javax.swing.JComboBox<String> cbConcepto;
     private javax.swing.JComboBox<String> cbIdCuenta;
     private javax.swing.JComboBox<String> cbNombreBanco;
-    private javax.swing.JComboBox<String> cbNombreCliente;
     private javax.swing.JComboBox<String> cbTipoMoneda;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -777,7 +774,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel label22;
     private javax.swing.JLabel label23;
     private javax.swing.JLabel label24;
     private javax.swing.JLabel label25;
@@ -792,6 +788,7 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private javax.swing.ButtonGroup tipoEstatus;
     private javax.swing.JLabel txtCodigoDocumento;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtbuscado;
     private javax.swing.JTextField txtvalor;
     // End of variables declaration//GEN-END:variables
