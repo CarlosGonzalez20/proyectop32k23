@@ -157,13 +157,11 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         txtbuscado = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        txtCodigoDocumento = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         cbNombreCliente = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cbConcepto = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -176,10 +174,10 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel8 = new javax.swing.JLabel();
         cbCodigoMov = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbcargo = new javax.swing.JRadioButton();
+        rbabono = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtvalor = new javax.swing.JTextField();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -345,9 +343,6 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
 
         cbNombreCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel5.setText("Valor");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jLabel6.setText("Concepto");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -378,19 +373,15 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCodigoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbNombreCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -418,18 +409,16 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
                         .addComponent(cbNombreBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtCodigoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cbNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(cbIdCuenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -451,11 +440,11 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
         jLabel9.setText("Cargo");
         jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tipoEstatus.add(jRadioButton1);
-        jRadioButton1.setText("Cargo");
+        tipoEstatus.add(rbcargo);
+        rbcargo.setText("Cargo");
 
-        tipoEstatus.add(jRadioButton2);
-        jRadioButton2.setText("Abono");
+        tipoEstatus.add(rbabono);
+        rbabono.setText("Abono");
 
         jLabel10.setText("Valor");
         jLabel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -472,13 +461,13 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                 .addGap(43, 43, 43)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
+                .addComponent(rbcargo)
                 .addGap(30, 30, 30)
-                .addComponent(jRadioButton2)
+                .addComponent(rbabono)
                 .addGap(48, 48, 48)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -489,10 +478,10 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
                     .addComponent(jLabel8)
                     .addComponent(cbCodigoMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
+                    .addComponent(rbcargo)
+                    .addComponent(rbabono)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -557,9 +546,9 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         int registrosBorrados=0;
-        clsTipoMovimientoBancos movimiento= new clsTipoMovimientoBancos();
-        movimiento.setTipoMovimientoId(Integer.parseInt(txtbuscado.getText()));
-        registrosBorrados=movimiento.setBorrarTipoMovimiento(movimiento);
+        clsBoletaClientesBancos boleta= new clsBoletaClientesBancos();
+        boleta.setIdBoleta(Integer.parseInt(txtbuscado.getText()));
+        registrosBorrados=boleta.setBorrarBoleta(boleta);
 
         JOptionPane.showMessageDialog(null, "Registro Borrado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
@@ -571,23 +560,44 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     }//GEN-LAST:event_btnEliminarActionPerformed
         int contador=0; 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        clsTipoMovimientoBancos movimiento = new clsTipoMovimientoBancos();
+        clsBoletaClientesBancos boleta = new clsBoletaClientesBancos();
         
-        if(rbHabilitado.isSelected()){
-            movimiento.setEstatusMovimiento("T");
+        if(rbcargo.isSelected()){
+            boleta.setEfectoBoleta("Cargo");
         }
         
-        else if(rbDeshabilitado.isSelected()){
-            movimiento.setEstatusMovimiento("F");
+        else if(rbabono.isSelected()){
+            boleta.setEfectoBoleta("Abono");
         }
         else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un estatus.");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un Cargo.");
             return;
         }
         
-        movimiento.setTipoMovimientoId(Integer.parseInt(txtTipoMovimiento.getText()));
-        movimiento.setNombreMovimiento(txtNombre.getText());   
-        movimiento.setIngresarTipoMovimiento(movimiento);
+        boleta.setIdBoleta(Integer.parseInt(txtCodigoDocumento.getText()));
+        boleta.setFechaEmisionBoleta(txtFecha.getText());   
+        boleta.setSaldoBoleta(Float.parseFloat(txtvalor.getText()));
+        
+        String selectedItem = cbNombreCliente.getSelectedItem().toString();
+        int itemNombre = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setIdCliente(itemNombre);
+        
+        String selectedItem2= cbConcepto.getSelectedItem().toString();
+        int itemConcepto = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setIdConcepto(itemConcepto);
+        
+        String selectedItem3= cbNombreBanco.getSelectedItem().toString();
+        int itemNombreBanco = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setCodigoBanco(itemNombreBanco);
+        
+        String selectedItem4= cbIdCuenta.getSelectedItem().toString();
+        int itemCuenta = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setIdCuenta(itemCuenta);
+        
+        String selectedItem5 = cbTipoMoneda.getSelectedItem().toString();
+        int itemTipoMoneda = Integer.parseInt(selectedItem.split(" - ")[0]);
+        boleta.setIdTipoMoneda(itemTipoMoneda);
+        
         JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         
@@ -712,10 +722,8 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -724,19 +732,19 @@ public class frmMantenimientoBoletaClientesBancos extends javax.swing.JInternalF
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
+    private javax.swing.JRadioButton rbabono;
+    private javax.swing.JRadioButton rbcargo;
     private javax.swing.JTable tablaMovimientos;
     private javax.swing.ButtonGroup tipoEstatus;
+    private javax.swing.JLabel txtCodigoDocumento;
+    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtbuscado;
+    private javax.swing.JTextField txtvalor;
     // End of variables declaration//GEN-END:variables
 }
