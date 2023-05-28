@@ -104,18 +104,16 @@ public class daoBoletaClientesBancos {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setInt(1, boleta.getCodigoBoleta());
+            stmt.setInt(1, boleta.getCodigoBanco());
             stmt.setString(2, boleta.getFechaEmisionBoleta());
-            stmt.setInt(3, boleta.getIdConcepto());
-            stmt.setString(4, boleta.getNombreConcepto());
-            stmt.setInt(5, boleta.getNumeroCuenta());
-            stmt.setString(6, boleta.getEfectoConcepto());
-            stmt.setInt(7, boleta.getIdTipoPersonaBancos());
-            stmt.setString(8, boleta.getEstatusConcepto());
-            stmt.setString(9, boleta.getNombreCliente());
-            stmt.setInt(10, boleta.getIdCliente());
-            stmt.setString(11, boleta.getNitCliente());
-            stmt.setInt(12, boleta.getIdBoleta());
+            stmt.setInt(3, boleta.getIdCliente());
+            stmt.setDouble(4, boleta.getSaldoBoleta());
+            stmt.setInt(5, boleta.getIdConcepto());
+            stmt.setInt(6, boleta.getIdTipoMovimiento());
+            stmt.setInt(7, boleta.getIdCuenta());
+            stmt.setString(8, boleta.getEfectoBoleta());
+            stmt.setInt(9, boleta.getIdTipoMoneda());
+            stmt.setInt(10, boleta.getIdBoleta());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
